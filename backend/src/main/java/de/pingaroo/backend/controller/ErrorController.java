@@ -4,6 +4,7 @@ import de.pingaroo.backend.domain.dtos.EndpointErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,17 @@ public class ErrorController {
                 .build();
 
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<EndpointErrorResponse> handleBadCredentialsException(BadCredentialsException ex) {
+        log.error("Caught BadCredentialsException: ", ex);
+        EndpointErrorResponse errorResponse = EndpointErrorResponse.builder()
+                .StatusCode(HttpStatus.UNAUTHORIZED.value())
+                .Message("Incorrect username or password") 
+                .build();
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
     
 }
