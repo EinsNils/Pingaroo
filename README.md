@@ -2,6 +2,8 @@
 
 **Pingaroo** ist eine SaaS-Anwendung für **API-Monitoring mit automatischen Benachrichtigungen per E-Mail**. Nutzer können API-Endpoints überwachen, Benachrichtigungsgruppen verwalten und Regeln erstellen, um Alerts gezielt zu versenden. Ideal für Entwickler und Teams, die ihre APIs im Auge behalten möchten.
 
+[![Deploy to Production](https://github.com/EinsNils/Pingaroo/actions/workflows/deploy.yml/badge.svg)](https://github.com/EinsNils/Pingaroo/actions/workflows/deploy.yml)
+
 ## 🚀 Features
 
 - Benutzer-Registrierung & Login
