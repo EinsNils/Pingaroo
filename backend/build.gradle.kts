@@ -30,16 +30,19 @@ dependencies {
 	implementation(libs.mssql.jdbc)
 	implementation(libs.mapstruct)
 	implementation(libs.jakarta.validation)
-	implementation(libs.hibernate.validator)
+	implementation(libs.hibernate.validator) 
 	implementation(libs.jjwt.api)
+	
 	runtimeOnly(libs.jjwt.impl)
 	runtimeOnly(libs.jjwt.jackson)
 	
 	compileOnly(libs.lombok)
+	
 	annotationProcessor(libs.lombok)
 	annotationProcessor(libs.mapstruct.processor)
 	
 	testImplementation(libs.spring.boot.test)
+	
 	testRuntimeOnly(libs.junit.platform.launcher)
 }
 
