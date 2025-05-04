@@ -18,7 +18,6 @@ public class EndpointErrorResponse {
     private List<FieldError> errors;
 
     @Data
-    @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public class FieldError {

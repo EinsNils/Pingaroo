@@ -29,7 +29,7 @@ public class ErrorController {
         log.error("Caught IllegalArgumentException: ", ex);
         EndpointErrorResponse errorResponse = EndpointErrorResponse.builder()
                 .StatusCode(400)
-                .Message("Invalid input provided")
+                .Message(ex.getMessage())
                 .build();
         
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
