@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=pingaroo;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: YourStrong@Passw0rd
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop #TODO: only for development
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect
+
+server:
+  port: 8080
+  
+jwt:
+  secret: B7R2vP1qIuPZz/txFJw2RKEJ8qMxS0iMzhYzkLa8H0I= #This will be changed on the Server
