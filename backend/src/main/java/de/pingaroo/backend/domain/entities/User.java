@@ -35,9 +35,10 @@ public class User {
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endpoint> apiEndpoints;
-    
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
+    private Role role;
     
     @Column(nullable = false)
     private boolean isActive;

@@ -1,5 +1,6 @@
 package de.pingaroo.backend.service.impl;
 
+import de.pingaroo.backend.domain.Role;
 import de.pingaroo.backend.domain.entities.User;
 import de.pingaroo.backend.repositories.UserRepository;
 import de.pingaroo.backend.service.AuthenticationService;
@@ -39,13 +40,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
       throw new IllegalArgumentException("User already exists with email: " + email);
     }
 
-    User user = User.builder()
-        .email(email)
-        .password(passwordEncoder.encode(password))
-        .firstName(firstName)
-        .lastName(lastName)
-        .isActive(true)
-        .build();
+    User user =
+        User.builder()
+            .email(email)
+            .password(passwordEncoder.encode(password))
+            .firstName(firstName)
+            .lastName(lastName)
+            .role(Role.USER)
+            .isActive(false)
+            .build();
 
     userRepository.save(user);
     return userDetailsService.loadUserByUsername(email);
