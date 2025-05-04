@@ -1,5 +1,6 @@
 package de.pingaroo.backend.mappers;
 
+import de.pingaroo.backend.domain.dtos.CreateEndpointRequest;
 import de.pingaroo.backend.domain.dtos.EndpointDto;
 import de.pingaroo.backend.domain.entities.Endpoint;
 import org.mapstruct.Mapper;
@@ -14,4 +15,6 @@ public interface EndpointMapper {
     
     @Mapping(target = "owner.id", source = "ownerId")
     Endpoint toDomain(EndpointDto endpointDto);
+    
+    Endpoint toEntity(CreateEndpointRequest cereateEndpointRequest);
 }

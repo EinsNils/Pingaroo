@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface EndpointService {
     List<Endpoint> listEndpoints();
+    Endpoint createEndpoint(Endpoint endpoint);
 }

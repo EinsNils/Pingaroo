@@ -1,13 +1,15 @@
 package de.pingaroo.backend.controller;
 
+import de.pingaroo.backend.domain.dtos.CreateEndpointRequest;
 import de.pingaroo.backend.domain.dtos.EndpointDto;
+import de.pingaroo.backend.domain.entities.Endpoint;
 import de.pingaroo.backend.mappers.EndpointMapper;
 import de.pingaroo.backend.service.EndpointService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +27,15 @@ public class EndpointController {
         endpointService.listEndpoints().stream().map(endpointMapper::toDto).toList();
     
     return ResponseEntity.ok(endpoints);
+  }
+
+  @PostMapping
+  public ResponseEntity<EndpointDto> createEndpoint(
+      @Valid @RequestBody CreateEndpointRequest createEndpointRequest) {
+
+    Endpoint endpointToEntity = endpointMapper.toEntity(createEndpointRequest);
+    Endpoint savedEndpoint = endpointService.createEndpoint(endpointToEntity);
+
+    return new ResponseEntity<>(endpointMapper.toDto(savedEndpoint), HttpStatus.CREATED);
   }
 }
