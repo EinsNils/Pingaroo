@@ -13,8 +13,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EndpointDto {
 
-  private UUID id;
-  private String name;
-  private int checkInterval;
-  private boolean isActive;
+    private UUID id;
+    private String name;
+    private String description;
+    private String url;
+    private UUID ownerId;
+    private int checkInterval;
+    private boolean isActive;
 }

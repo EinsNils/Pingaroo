@@ -1,6 +1,7 @@
 package de.pingaroo.backend.controller;
 
 import de.pingaroo.backend.domain.dtos.EndpointDto;
+import de.pingaroo.backend.service.EndpointService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EndpointController {
     
+    private final EndpointService endpointService;
+    
     @GetMapping
     public ResponseEntity<List<EndpointDto>> listEndpoints(){
-        //TODO implement this
+        return endpointService.listEndpoints();
     }
 }

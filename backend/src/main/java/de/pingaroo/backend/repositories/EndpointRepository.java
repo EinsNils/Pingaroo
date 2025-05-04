@@ -4,7 +4,10 @@ import de.pingaroo.backend.domain.entities.Endpoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface EndpintRepository extends JpaRepository<Endpoint, UUID> {}
+public interface EndpointRepository extends JpaRepository<Endpoint, UUID> {
+    List<Endpoint> findAllByOwnerId(UUID userId);
+}
