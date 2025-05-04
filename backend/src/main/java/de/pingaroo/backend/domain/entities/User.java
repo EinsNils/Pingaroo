@@ -34,7 +34,7 @@ public class User {
     private String lastName;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ApiEndpoint> apiEndpoints;
+    private List<Endpoint> apiEndpoints;
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

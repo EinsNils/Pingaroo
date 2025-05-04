@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ApiEndpoint {
+public class Endpoint {
     
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,6 +22,9 @@ public class ApiEndpoint {
     
     @Column(nullable = false)
     private String name;
+    
+    @Column(nullable = false)
+    private String description;
     
     @Column(nullable = false)
     private String url;
