@@ -7,8 +7,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BACKEND_IMAGE: ${{ github.repository_owner }}/pingaroo/backend
-  FRONTEND_IMAGE: ${{ github.repository_owner }}/pingaroo/frontend
 
 jobs:
   build-and-push:
@@ -32,6 +30,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Set lowercase repository owner
         run: |
           echo "REPO_OWNER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
@@ -49,8 +50,9 @@ jobs:
           context: ./backend
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/pingaroo/backend:${{ github.sha }},${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/pingaroo/backend:latest
-          build-args: |
-            REPO_OWNER=${{ env.REPO_OWNER }}
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and push Frontend
         uses: docker/build-push-action@v5
@@ -58,8 +60,9 @@ jobs:
           context: ./frontend
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/pingaroo/frontend:${{ github.sha }},${{ env.REGISTRY }}/${{ env.REPO_OWNER }}/pingaroo/frontend:latest
-          build-args: |
-            REPO_OWNER=${{ env.REPO_OWNER }}
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     needs: build-and-push
@@ -104,5 +107,6 @@ jobs:
             echo "BACKEND_IMAGE=${{ env.REPO_OWNER }}/pingaroo/backend" >> .env
             echo "FRONTEND_IMAGE=${{ env.REPO_OWNER }}/pingaroo/frontend" >> .env
             echo "IMAGE_TAG=${{ github.sha }}" >> .env
+            docker-compose down
             docker-compose pull
             docker-compose up -d 
