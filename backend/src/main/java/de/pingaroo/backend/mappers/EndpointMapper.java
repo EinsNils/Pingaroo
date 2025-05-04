@@ -16,5 +16,6 @@ public interface EndpointMapper {
     @Mapping(target = "owner.id", source = "ownerId")
     Endpoint toDomain(EndpointDto endpointDto);
     
-    Endpoint toEntity(CreateEndpointRequest cereateEndpointRequest);
+    //TODO: Add mapping for the ownerId 
+    Endpoint toEntity(CreateEndpointRequest createEndpointRequest);
 }
