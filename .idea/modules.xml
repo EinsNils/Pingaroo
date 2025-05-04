@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Pingaroo.iml" filepath="$PROJECT_DIR$/Pingaroo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Pingaroo.iml" filepath="$PROJECT_DIR$/.idea/Pingaroo.iml" />
     </modules>
   </component>
 </project>
