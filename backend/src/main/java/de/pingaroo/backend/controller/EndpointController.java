@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController()
 @RequestMapping("/api/v1/endpoints")
@@ -37,5 +38,11 @@ public class EndpointController {
     Endpoint savedEndpoint = endpointService.createEndpoint(endpointToEntity);
 
     return new ResponseEntity<>(endpointMapper.toDto(savedEndpoint), HttpStatus.CREATED);
+  }
+  
+  @DeleteMapping(path = "/{id}")
+  public ResponseEntity<Void> deleteEndpoint(@PathVariable UUID id) {
+    endpointService.deleteEndpoint(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

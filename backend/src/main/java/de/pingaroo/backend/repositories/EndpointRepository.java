@@ -12,4 +12,6 @@ public interface EndpointRepository extends JpaRepository<Endpoint, UUID> {
     List<Endpoint> findAllByOwnerId(UUID userId);
 
     boolean existsByNameIgnoreCase(String name);
+
+    void deleteById(UUID id);
 }

@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +32,15 @@ public class EndpointServiceImpl implements EndpointService {
     }
 
     return endpointRepository.save(endpoint);
+  }
+
+  @Override
+  public void deleteEndpoint(UUID id) {
+    Optional<Endpoint> endpoint = endpointRepository.findById(id);
+    if (endpoint.isEmpty()) {
+      throw new IllegalStateException("Endpoint not found with id: " + id);
+    }
+
+    endpointRepository.deleteById(id);
   }
 }
