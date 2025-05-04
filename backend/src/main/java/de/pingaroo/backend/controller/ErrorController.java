@@ -17,7 +17,7 @@ public class ErrorController {
     public ResponseEntity<EndpointErrorResponse> handleException(Exception ex) {
         log.error("Caught exception: ", ex);
         EndpointErrorResponse errorResponse = EndpointErrorResponse.builder()
-                .StatusCode(500)
+                .StatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .Message("An unexpected error occurred")
                 .build();
         
@@ -28,11 +28,22 @@ public class ErrorController {
     public ResponseEntity<EndpointErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
         log.error("Caught IllegalArgumentException: ", ex);
         EndpointErrorResponse errorResponse = EndpointErrorResponse.builder()
-                .StatusCode(400)
-                .Message(ex.getMessage())
+                .StatusCode(HttpStatus.BAD_REQUEST.value())
+                .Message(ex.getMessage()) //TODO: replace this later with a more generic message
                 .build();
         
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<EndpointErrorResponse> handleIllegalStateException(IllegalStateException ex) {
+        log.error("Caught IllegalStateException: ", ex);
+        EndpointErrorResponse errorResponse = EndpointErrorResponse.builder()
+                .StatusCode(HttpStatus.CONFLICT.value())
+                .Message(ex.getMessage()) //TODO: replace this later with a more generic message
+                .build();
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
     
 }
